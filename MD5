@@ -1,0 +1,12 @@
+a8feb58c2b08986af4fe7a49852f9ad6 *DESCRIPTION
+ae2c29ddb3f5d69bcfb7b9176468f416 *NAMESPACE
+3aa3e44dc563aa5d787e333f22e2d6c3 *R/TideTable.R
+db97b47cfb625c3920f8f212b882a69e *R/UtilityFunctions.R
+82fde14d770594e78aebce4e3775ff2f *R/observation.R
+85c502d75889df70200851f40449c376 *README.md
+2d7a566a74c42e7addace5faf02e5ead *data/observation.rda
+63894025754224786d327bbfc3e748ef *man/Funcs.Rd
+e8d68f52d042616f6d6a059bd17d76e7 *man/NumCulm.Rd
+c672d443763e9c57080efbb52aad334b *man/PlotTides.Rd
+8d150ac12df98bbaeb8ee4f076988a3a *man/TideTable.Rd
+081d754d2b98a5726bf5acfbc15adaa7 *man/observation.Rd
