@@ -2,7 +2,7 @@
 % Please edit documentation in R/UtilityFunctions.R
 \name{NumCulm}
 \alias{NumCulm}
-\title{Calculates transit number (numm) and high (1, 3) or low (2, 4) water number (k4).}
+\title{Calculates numm and k4}
 \usage{
 NumCulm(t, tmhwi)
 }
@@ -17,4 +17,3 @@ Returns a list containing numm and k4.
 \description{
 Calculates transit number (numm) and high (1, 3) or low (2, 4) water number (k4).
 }
-

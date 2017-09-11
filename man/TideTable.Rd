@@ -12,15 +12,15 @@ TideTable(dataInput, otz = 1, hwi = "99:99", asdate, astime, aedate, aetime,
 
 \item{otz}{The time zone of the observations}
 
-\item{hwi}{The average of all intervals between the Moon's transit (upper or lower) over the Greenwich meridian and the following           high or low waters for all phases of the Moon is known as mean high water lunitidal interval and is abbreviated to high              water interval (hwi). Please only supply a value, when you are sure. Otherwise leave the default value "99:99" untouched.            hwi is then computed for you.}
+\item{hwi}{The average of all intervals between the Moon's transit (upper or lower) over the Greenwich meridian and the following high or low waters for all phases of the Moon is known as mean high water lunitidal interval and is abbreviated to high              water interval (hwi). Please only supply a value, when you are sure. Otherwise leave the default value "99:99" untouched.            hwi is then computed for you.}
 
 \item{asdate}{A string indication the date you want the analysis to start with. Format: "yyyy/mm/dd".}
 
 \item{astime}{A string indicating the time you want the analysis to start with. Format: "hh:mm:ss"}
 
-\item{aedate}{A string indication the date you want the analysis to start with. Format: "yyyy/mm/dd".}
+\item{aedate}{A string indication the date you want the analysis to end with. Format: "yyyy/mm/dd".}
 
-\item{aetime}{A string indicating the time you want the analysis to start with. Format: "hh:mm:ss"}
+\item{aetime}{A string indicating the time you want the analysis to end with. Format: "hh:mm:ss"}
 
 \item{ssdate}{Synthesis start date. This indicates the date you want your tide table to start with. Format: See above}
 
@@ -59,4 +59,3 @@ Godin, Gabriel (1972) The Analysis of Tides. Toronto, 264pp
 
 \url{http://www.bsh.de/de/Produkte/Buecher/Berichte_/Bericht50/BSH-Bericht50.pdf}
 }
-

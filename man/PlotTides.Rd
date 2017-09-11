@@ -2,7 +2,7 @@
 % Please edit documentation in R/UtilityFunctions.R
 \name{PlotTides}
 \alias{PlotTides}
-\title{Plots the computed tides}
+\title{Plot function}
 \usage{
 PlotTides(data)
 }
@@ -15,4 +15,3 @@ Generates eight plots
 \description{
 Plots the computed tides
 }
-

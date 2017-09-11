@@ -1,92 +1,146 @@
-#' Returns predictor vector for design matrix from 44 astronomical angular velocities.
+#' Returns predictor vector for design matrix
+#' @description Returns predictor vector for design matrix from 44 astronomical angular velocities.
 #' @param xi Transit index
-#' @param ma Max number of predictors.
-#' @param ivar Dummy.
 #' @param tdiff Length of input time series.
-#' @return The predictor vector. Values between -1, 1.  
+#' @return A list with the selected angular velocities, their ranks and the predictor vector (Values between -1, 1).
+#' @export  
 
-Funcs <- function (xi, ma = 89, ivar = 1, tdiff) {
+Funcs <-  function(tdiff, xi) {
   
-  rad <- 0.017453292519943
-  xi  <- rad * xi
-  
-  omegas     <- vector()
-  omegas[1]  <- 0.054809904
-  omegas[2]  <- 0.115308512
-  omegas[3]  <- 0.904885870
-  omegas[4]  <- 1.020194382
-  omegas[5]  <- 1.809771741
-  omegas[6]  <- 2.040388764
-  omegas[7]  <- 11.597841752
-  omegas[8]  <- 11.713150263
-  omegas[9]  <- 13.468112100
-  omegas[10] <- 13.522922004
-  omegas[11] <- 13.583420612
-  omegas[12] <- 13.638230516
-  omegas[13] <- 13.693040419
-  omegas[14] <- 15.563310768
-  omegas[15] <- 23.426300526
-  omegas[16] <- 24.215877885
-  omegas[17] <- 25.181262364
-  omegas[18] <- 25.236072267
-  omegas[19] <- 25.290882171
-  omegas[20] <- 25.351380779
-  omegas[21] <- 27.045844008
-  omegas[22] <- 27.161152519
-  omegas[23] <- 27.221651128
-  omegas[24] <- 27.276461031
-  omegas[25] <- 27.331270935
-  omegas[26] <- 36.949222530
-  omegas[27] <- 37.738799889
-  omegas[28] <- 38.704184367
-  omegas[29] <- 38.758994271
-  omegas[30] <- 38.813804174
-  omegas[31] <- 38.874302783
-  omegas[32] <- 38.989611294
-  omegas[33] <- 40.799383035
-  omegas[34] <- 49.451950152
-  omegas[35] <- 50.472144534
-  omegas[36] <- 52.281916275
-  omegas[37] <- 52.512533298
-  omegas[38] <- 54.552922062
-  omegas[39] <- 62.185294797
-  omegas[40] <- 63.995066538
-  omegas[41] <- 66.035455302
-  omegas[42] <- 75.708216801
-  omegas[43] <- 77.748605565
-  omegas[44] <- 100.944289068
-  
-  afunc              <- vector()
-  afunc[1]           <- 1
-  rayleigh.criterion <- 0
-  
-  for(i in seq(2,ma,2)) {   
-    afunc[i]     <- cos(omegas[i / 2] * xi)
-    afunc[i + 1] <- sin(omegas[i / 2] * xi)
-  }
-  
-  hh <- 0
-  for(h in 0 : 44){
-    if(h < hh) next
-    for(hh in ((h + 1) : 44)) {
-      if(hh > 44) break
-      if(h == 0) {
-        rayleigh.criterion <- omegas[hh] * tdiff
-      } else {          
-        rayleigh.criterion <- (omegas[hh] - omegas[h]) * tdiff
-      }
-      if((rayleigh.criterion > 360)) { break
-      } else {    
-        afunc[2 * hh]     <- 0
-        afunc[2 * hh + 1] <- 0
+    #Vector with angular velocities
+    rad <- 0.017453292519943
+    xi  <- rad * xi
+    
+    omegas <- vector()
+    omegas[ 1]<-0.054809904 
+    omegas[ 2]<-0.115308512 
+    omegas[ 3]<-0.904885870 
+    omegas[ 4]<-1.020194382 
+    omegas[ 5]<-1.809771741 
+    omegas[ 6]<-2.040388764 
+    omegas[ 7]<-11.597841752 
+    omegas[ 8]<-11.713150263 
+    omegas[ 9]<-13.468112100 
+    omegas[10]<-13.522922004 
+    omegas[11]<-13.583420612 
+    omegas[12]<-13.638230516 
+    omegas[13]<-13.693040419 
+    omegas[14]<-15.563310768 
+    omegas[15]<-23.426300526 
+    omegas[16]<-24.215877885 
+    omegas[17]<-25.181262364 
+    omegas[18]<-25.236072267 
+    omegas[19]<-25.290882171 
+    omegas[20]<-25.351380779 
+    omegas[21]<-27.045844008 
+    omegas[22]<-27.161152519 
+    omegas[23]<-27.221651128 
+    omegas[24]<-27.276461031 
+    omegas[25]<-27.331270935 
+    omegas[26]<-36.949222530 
+    omegas[27]<-37.738799889 
+    omegas[28]<-38.704184367 
+    omegas[29]<-38.758994271 
+    omegas[30]<-38.813804174 
+    omegas[31]<-38.874302783 
+    omegas[32]<-38.989611294 
+    omegas[33]<-40.799383035 
+    omegas[34]<-49.451950152 
+    omegas[35]<-50.472144534 
+    omegas[36]<-52.281916275 
+    omegas[37]<-52.512533298 
+    omegas[38]<-54.552922062 
+    omegas[39]<-62.185294797 
+    omegas[40]<-63.995066538 
+    omegas[41]<-66.035455302 
+    omegas[42]<-75.708216801 
+    omegas[43]<-77.748605565 
+    omegas[44]<-100.944289068
+    
+    omega_pos <- omegas
+    
+    iranks <- vector()
+    iranks[ 1]<-16
+    iranks[ 2]<-14
+    iranks[ 3]<-13
+    iranks[ 4]<-6
+    iranks[ 5]<-30
+    iranks[ 6]<-8
+    iranks[ 7]<-12
+    iranks[ 8]<-9
+    iranks[ 9]<-17
+    iranks[10]<-3
+    iranks[11]<-23
+    iranks[12]<-2
+    iranks[13]<-5
+    iranks[14]<-24
+    iranks[15]<-44
+    iranks[16]<-28
+    iranks[17]<-21
+    iranks[18]<-1
+    iranks[19]<-36
+    iranks[20]<-19
+    iranks[21]<-31
+    iranks[22]<-10
+    iranks[23]<-26
+    iranks[24]<-4
+    iranks[25]<-35
+    iranks[26]<-11
+    iranks[27]<-37
+    iranks[28]<-38
+    iranks[29]<-15
+    iranks[30]<-23
+    iranks[31]<-39
+    iranks[32]<-29
+    iranks[33]<-27
+    iranks[34]<-32
+    iranks[35]<-7
+    iranks[36]<-43
+    iranks[37]<-18
+    iranks[38]<-25
+    iranks[39]<-40
+    iranks[40]<-34
+    iranks[41]<-42
+    iranks[42]<-20
+    iranks[43]<-41
+    iranks[44]<-33
+    
+    omega_pos_rank <- iranks
+    omega_sel      <- vector()
+    omega_sel_rank <- vector()
+    
+    while (length(omega_pos) > 0) {
+      #Find most relevant velocities
+      maxrank <- which.min(omega_pos_rank)
+      omega_pos_maxrank <- omega_pos[maxrank]
+      if( omega_pos_maxrank * tdiff > 360){
+        omega_sel       <- c(omega_sel,  omega_pos_maxrank)
+        omega_sel_rank  <- c(omega_sel_rank, omega_pos_rank[maxrank])
+        del_index       <- which((abs(omega_pos -  omega_pos_maxrank) * tdiff) < 360)
+        omega_pos       <- omega_pos[-del_index]
+        omega_pos_rank  <- omega_pos_rank[-del_index]
+      } else {
+        omega_pos      <- omega_pos[-maxrank]
+        omega_pos_rank <- omega_pos_rank[-maxrank]
       }
     }
+    omega_sel <- omega_sel[order(omega_sel)]
+    
+    #Computing the afuncs for the selected omegas
+    afunc <- vector(mode = "numeric", length = 2 * length(omega_sel) + 1)
+    afunc[1] <- 1.00000
+    
+    for(i in seq(2, 2 * length(omega_sel) + 1, 2)) {
+      oxi          <- omega_sel[i / 2] * xi
+      afunc[i]     <- cos(oxi)
+      afunc[i + 1] <- sin(oxi)
+    }
+    
+    return(list(omega_sel, omega_sel_rank, afunc))
   }
-  
-  return(afunc)
-}
 
-#' Calculates transit number (numm) and high (1, 3) or low (2, 4) water number (k4).
+#' Calculates numm and k4
+#' @description Calculates transit number (numm) and high (1, 3) or low (2, 4) water number (k4).
 #' @param t Time in days after 1900/01/01 00:00:00 UTC.
 #' @param tmhwi Mean high water interval (Greenwich meridian).
 #' @return Returns a list containing numm and k4.
@@ -114,7 +168,8 @@ NumCulm <- function(t, tmhwi){
   return(nummk4)
 }
 
-#' Plots the computed tides
+#' Plot function
+#' @description Plots the computed tides
 #' @param data Output from the TideTables function
 #' @return Generates eight plots
 #' @importFrom graphics plot
@@ -122,6 +177,9 @@ NumCulm <- function(t, tmhwi){
 #' @export 
 
 PlotTides <- function(data){
+  
+  .Deprecated(package = "TideTables", msg = "This function is deprecated and will be removed in later releases. Please make up your own plot.")
+  
   synthesis <- data$c.table
   
   high_or_low_water      <- NULL
@@ -185,4 +243,86 @@ PlotTides <- function(data){
        xlab = "i",
        ylab = "Time",
        main = "Low Water - Lower Transit")
+}
+
+#' Calculates tmhwi
+#' @description This functions computes an estimate for the mean high water intervall (tmhwi) in UTC
+#' @param input Should be a data.table object with three columns d_days, high_low and height, where 
+#' d_days is a vector of fraction of days since 1900/01/01 00:00:00, high_low indicating a high water(1)
+#' or a low water(0), height is the corresponding height
+#' @return Returns the mean high water intervall in UTC
+#' @importFrom chron chron
+#' @export
+EstimateTmhwi <- function(input){
+  
+  tperiode.m2  <- 360 / 28.9841042
+  tmean.moon   <- tperiode.m2 * 2
+  tm24         <- tmean.moon / 24
+  or           <- chron(dates. = "1900/01/01", 
+                                        times. = "00:00:00",
+                                        format = c(dates = "y/m/d", times = "h:m:s"),
+                                        out.format = c(dates = "y/m/d", times = "h:m:s"))
+  tmoon.0      <- chron(dates. = "1949/12/31", 
+                        times. = "21:08:00",
+                        format = c(dates = "y/m/d", times = "h:m:s"),
+                        out.format = c(dates = "y/m/d", times = "h:m:s")) - or
+  
+  tplus        <- tmoon.0 + 24.2491 / 1440.00
+  
+  numm      <- NULL
+  tmmt_numm <- NULL
+  height    <- NULL
+  high_low  <- NULL
+  mean_h    <- NULL
+  mhist     <- NULL
+  n_mhist   <- NULL
+  tmmt_numm <- NULL
+  d_days    <- NULL
+  
+  input[, numm := floor((d_days - tplus) / tm24)]
+  input[, tmmt_numm := numm * tm24 + tplus]
+  input[, mhist := as.numeric(floor(96 * (d_days - tmmt_numm) / tm24) + 1)]
+  input[, n_mhist := .N, by = mhist]
+  input[, mean_h := mean(height), by = mhist]
+  setkey(input, "mhist")
+  
+  input <- unique(input, by = "mhist")[high_low == 1][order(mhist)]
+  check.matrix <- matrix(nrow = 96, ncol = 3)
+  
+  for(i in 1L : 96L){
+    mh <- i - 1
+    if(length(input[mhist == ((mh + 1) %% 96) + 1, n_mhist] - input[mhist == i, n_mhist]) > 0) {
+      check.matrix[i, 1] <- input[mhist == ((mh + 1) %% 96) + 1, n_mhist] - input[mhist == i, n_mhist]
+      check.matrix[i, 2] <- input[mhist == i, mean_h]
+      check.matrix[i, 3] <- input[mhist == i, n_mhist]
+    } else {
+      check.matrix[i, 1] <- 99999
+      check.matrix[i, 2] <- 99999
+      check.matrix[i, 3] <- 99999
+    }
+  }
+  
+  mmax     <- 0
+  mhistmax <- vector()
+  for(i in 1L : 96L) {
+    mh <- i - 1
+    if((check.matrix[((mh - 4) %% 96) + 1, 1] > 0) 
+       & (check.matrix[((mh - 3) %% 96) + 1, 1] > 0) 
+       & (check.matrix[((mh - 2) %% 96) + 1, 1] > 0)
+       & (check.matrix[((mh - 1) %% 96) + 1, 1] >= 0)
+       & (check.matrix[((mh + 1) %% 96) + 1, 1] < 0)
+       & (check.matrix[((mh + 2) %% 96) + 1, 1] < 0)
+       & (check.matrix[((mh + 3) %% 96) + 1, 1] < 0)
+       & (check.matrix[((mh + 4) %% 96) + 1, 1] < 0)) {
+      if(check.matrix[i, 2] > check.matrix[(mh - 1%%i) + 1, 2] &
+         check.matrix[i, 2] >= check.matrix[(mh + 1%%i) + 1, 2]){
+        mmax           <- mmax + 1
+        mhistmax[mmax] <- i
+      }
+    }
+  }
+  tmhwi <- as.numeric(input[mhist %in% mhistmax][order(mean_h, decreasing = TRUE)][1][, mhist])
+  tmhwi <- tm24 / 96 * (tmhwi - 0.5)
+  tmhwi <- 24 * tmhwi
+  return(tmhwi)
 }

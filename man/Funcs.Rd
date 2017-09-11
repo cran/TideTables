@@ -2,23 +2,18 @@
 % Please edit documentation in R/UtilityFunctions.R
 \name{Funcs}
 \alias{Funcs}
-\title{Returns predictor vector for design matrix from 44 astronomical angular velocities.}
+\title{Returns predictor vector for design matrix}
 \usage{
-Funcs(xi, ma = 89, ivar = 1, tdiff)
+Funcs(tdiff, xi)
 }
 \arguments{
-\item{xi}{Transit index}
-
-\item{ma}{Max number of predictors.}
-
-\item{ivar}{Dummy.}
-
 \item{tdiff}{Length of input time series.}
+
+\item{xi}{Transit index}
 }
 \value{
-The predictor vector. Values between -1, 1.
+A list with the selected angular velocities, their ranks and the predictor vector (Values between -1, 1).
 }
 \description{
 Returns predictor vector for design matrix from 44 astronomical angular velocities.
 }
-
